@@ -7,52 +7,7 @@ export const MOCK_USERS: User[] = [
   { id: 4, username: "dave", role: "employee", fullName: "Dave Developer" },
 ];
 
-export const MOCK_TASKS: Task[] = [
-  {
-    id: 1,
-    title: "Implement Login Page",
-    description: "Create the login form with validation and error handling.",
-    status: "done",
-    priority: "high",
-    assignedTo: 3,
-    createdBy: 2,
-    dueDate: "2023-10-15T00:00:00.000Z",
-    createdAt: "2023-10-01T10:00:00.000Z",
-  },
-  {
-    id: 2,
-    title: "Design Dashboard Layout",
-    description: "Create a responsive layout for the main dashboard.",
-    status: "review",
-    priority: "medium",
-    assignedTo: 3,
-    createdBy: 2,
-    dueDate: "2023-10-20T00:00:00.000Z",
-    createdAt: "2023-10-02T11:00:00.000Z",
-  },
-  {
-    id: 3,
-    title: "API Integration for Tasks",
-    description: "Connect the frontend task list to the backend API.",
-    status: "in_progress",
-    priority: "high",
-    assignedTo: 4,
-    createdBy: 2,
-    dueDate: "2023-10-25T00:00:00.000Z",
-    createdAt: "2023-10-05T09:30:00.000Z",
-  },
-  {
-    id: 4,
-    title: "Update Documentation",
-    description: "Update the README and API docs.",
-    status: "todo",
-    priority: "low",
-    assignedTo: null,
-    createdBy: 1,
-    dueDate: "2023-11-01T00:00:00.000Z",
-    createdAt: "2023-10-10T14:15:00.000Z",
-  },
-];
+export const MOCK_TASKS: Task[] = [];
 
 export const TRANSITION_RULES: Record<Role, Status[]> = {
   employee: ["todo", "in_progress"], // Can move FROM todo TO in_progress
