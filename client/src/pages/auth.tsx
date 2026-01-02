@@ -144,7 +144,7 @@ export default function AuthPage() {
             )}
             
             <div className="space-y-1.5">
-              <Label htmlFor="role">Role</Label>
+              <Label htmlFor="role">Registering as</Label>
               <Select value={role} onValueChange={(val) => setRole(val as Role)}>
                 <SelectTrigger className="bg-slate-50 border-slate-200 dark:bg-slate-900 dark:border-slate-800">
                   <SelectValue placeholder="Select a role" />
@@ -156,6 +156,46 @@ export default function AuthPage() {
                 </SelectContent>
               </Select>
             </div>
+
+            {isRegistering && role === "admin" && (
+              <div className="space-y-1.5 animate-in fade-in slide-in-from-top-2 p-3 rounded-lg bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900">
+                <Label htmlFor="adminCode" className="text-yellow-700 dark:text-yellow-400 text-[10px] uppercase font-bold">Admin Invitation Code</Label>
+                <Input 
+                  id="adminCode" 
+                  placeholder="Enter security code" 
+                  className="bg-white border-yellow-200 focus:ring-yellow-500/20 dark:bg-slate-900 dark:border-yellow-900"
+                  required
+                />
+              </div>
+            )}
+
+            {isRegistering && role === "manager" && (
+              <div className="space-y-1.5 animate-in fade-in slide-in-from-top-2 p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900">
+                <Label htmlFor="department" className="text-blue-700 dark:text-blue-400 text-[10px] uppercase font-bold">Department</Label>
+                <Select defaultValue="engineering">
+                  <SelectTrigger className="bg-white border-blue-200 dark:bg-slate-900 dark:border-blue-900">
+                    <SelectValue placeholder="Select Department" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="engineering">Engineering</SelectItem>
+                    <SelectItem value="product">Product</SelectItem>
+                    <SelectItem value="design">Design</SelectItem>
+                    <SelectItem value="marketing">Marketing</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            {isRegistering && role === "employee" && (
+              <div className="space-y-1.5 animate-in fade-in slide-in-from-top-2 p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900">
+                <Label htmlFor="referral" className="text-green-700 dark:text-green-400 text-[10px] uppercase font-bold">Manager Referral ID</Label>
+                <Input 
+                  id="referral" 
+                  placeholder="optional" 
+                  className="bg-white border-green-200 focus:ring-green-500/20 dark:bg-slate-900 dark:border-green-900"
+                />
+              </div>
+            )}
 
             <Button 
               type="submit" 
