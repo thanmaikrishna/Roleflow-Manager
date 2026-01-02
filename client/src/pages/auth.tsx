@@ -17,7 +17,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState<Role>("employee");
-  const { login, isLoading } = useAuth();
+  const { login, registerUser, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -29,8 +29,16 @@ export default function AuthPage() {
       return;
     }
 
-    await login(username, role);
-    setLocation("/");
+    try {
+      if (isRegistering) {
+        await registerUser(username, fullName, role, password);
+      } else {
+        await login(username, role, password);
+      }
+      setLocation("/");
+    } catch (err) {
+      // Error handled by toast in context
+    }
   };
 
   return (
