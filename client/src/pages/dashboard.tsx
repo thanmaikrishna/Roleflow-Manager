@@ -62,34 +62,34 @@ export default function Dashboard() {
               <p className="text-xs text-muted-foreground">Tasks awaiting start</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-none shadow-sm bg-blue-50/50 dark:bg-blue-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">In Progress</CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-600 dark:text-blue-400">In Progress</CardTitle>
               <Clock className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.in_progress}</div>
-              <p className="text-xs text-muted-foreground">Currently active</p>
+              <div className="text-3xl font-bold text-blue-700 dark:text-blue-300">{stats.in_progress}</div>
+              <p className="text-xs text-blue-600/60 dark:text-blue-400/60 mt-1">Currently active</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-none shadow-sm bg-purple-50/50 dark:bg-purple-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">In Review</CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-600 dark:text-purple-400">In Review</CardTitle>
               <AlertCircle className="h-4 w-4 text-purple-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.review}</div>
-              <p className="text-xs text-muted-foreground">Awaiting approval</p>
+              <div className="text-3xl font-bold text-purple-700 dark:text-purple-300">{stats.review}</div>
+              <p className="text-xs text-purple-600/60 dark:text-purple-400/60 mt-1">Awaiting approval</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-none shadow-sm bg-green-50/50 dark:bg-green-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Completed</CardTitle>
+              <CardTitle className="text-sm font-medium text-green-600 dark:text-green-400">Completed</CardTitle>
               <CheckCircle2 className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.done}</div>
-              <p className="text-xs text-muted-foreground">Finished tasks</p>
+              <div className="text-2xl font-bold text-green-700 dark:text-green-300">{stats.done}</div>
+              <p className="text-xs text-green-600/60 dark:text-green-400/60 mt-1">Finished tasks</p>
             </CardContent>
           </Card>
         </div>
