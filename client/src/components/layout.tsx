@@ -81,46 +81,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc] dark:bg-[#020617] neo-blur">
+    <div className="flex min-h-screen bg-white dark:bg-slate-950 font-sans">
       {/* Desktop Sidebar */}
-      <div className="hidden md:block w-72 fixed inset-y-0 left-0 z-50 p-4">
-        <div className="h-full rounded-2xl glass overflow-hidden">
-          <SidebarContent />
-        </div>
+      <div className="hidden md:block w-64 fixed inset-y-0 left-0 z-50 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+        <SidebarContent />
       </div>
 
       {/* Mobile Sidebar */}
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden fixed top-4 left-4 z-50 glass h-10 w-10">
-            <Menu className="h-6 w-6" />
+          <Button variant="ghost" size="icon" className="md:hidden fixed top-4 left-4 z-50 border border-slate-200 dark:border-slate-800">
+            <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-72 border-none">
+        <SheetContent side="left" className="p-0 w-64 border-r border-slate-200 dark:border-slate-800">
           <SidebarContent />
         </SheetContent>
       </Sheet>
 
       {/* Main Content */}
-      <div className="flex-1 md:ml-72 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-40 h-20 bg-background/50 backdrop-blur-xl border-b border-border/50 px-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight capitalize">
-              {location === "/" ? "Overview" : location.substring(1)}
-            </h1>
-          </div>
+      <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
+        <header className="sticky top-0 z-40 h-16 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between">
+          <h1 className="text-lg font-semibold tracking-tight capitalize text-slate-900 dark:text-slate-50">
+            {location === "/" ? "Overview" : location.substring(1)}
+          </h1>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border/50 text-xs font-medium">
-              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              Live System
-            </div>
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-secondary h-10 w-10 rounded-full">
-              <Bell className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-50 rounded-full h-9 w-9">
+              <Bell className="h-4 w-4" />
             </Button>
           </div>
         </header>
-        <main className="flex-1 p-8 overflow-x-hidden">
-          <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out">
+        <main className="flex-1 p-6 md:p-10 overflow-x-hidden bg-slate-50/30 dark:bg-slate-950">
+          <div className="max-w-6xl mx-auto animate-in fade-in duration-500">
             {children}
           </div>
         </main>
