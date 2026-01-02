@@ -51,9 +51,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
 
   // Sync to local storage on changes
   useEffect(() => {
-    if (tasks.length > 0) {
-      localStorage.setItem("taskflow_tasks", JSON.stringify(tasks));
-    }
+    localStorage.setItem("taskflow_tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = (task: Omit<Task, "id" | "createdAt">) => {
