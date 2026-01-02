@@ -11,14 +11,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserCircle2, KeyRound } from "lucide-react";
 
 export default function AuthPage() {
+  const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState<Role>("employee");
   const { login, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username) return;
+    if (!username || (isRegistering && !password)) return;
+    
+    if (isRegistering && password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     await login(username, role);
     setLocation("/");
   };
@@ -38,11 +48,28 @@ export default function AuthPage() {
 
         <Card className="border-border/50 shadow-xl">
           <CardHeader>
-            <CardTitle>Welcome back</CardTitle>
-            <CardDescription>Sign in to your account to continue</CardDescription>
+            <CardTitle>{isRegistering ? "Create an account" : "Welcome back"}</CardTitle>
+            <CardDescription>
+              {isRegistering 
+                ? "Fill in your details to get started" 
+                : "Sign in to your account to continue"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleAuth} className="space-y-4">
+              {isRegistering && (
+                <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
+                  <Label htmlFor="fullName">Full Name</Label>
+                  <Input 
+                    id="fullName" 
+                    placeholder="John Doe" 
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="username">Username</Label>
                 <div className="relative">
@@ -58,6 +85,32 @@ export default function AuthPage() {
                   />
                 </div>
               </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input 
+                  id="password" 
+                  type="password"
+                  placeholder="••••••••" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              {isRegistering && (
+                <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input 
+                    id="confirmPassword" 
+                    type="password"
+                    placeholder="••••••••" 
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
               
               <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
@@ -71,9 +124,6 @@ export default function AuthPage() {
                     <SelectItem value="admin">Admin</SelectItem>
                   </SelectContent>
                 </Select>
-                <p className="text-xs text-muted-foreground mt-1">
-                  * Select a role to simulate permissions
-                </p>
               </div>
 
               <Button 
@@ -82,12 +132,33 @@ export default function AuthPage() {
                 disabled={isLoading}
                 data-testid="button-login"
               >
-                {isLoading ? "Signing in..." : "Sign In"}
+                {isLoading 
+                  ? (isRegistering ? "Creating account..." : "Signing in...") 
+                  : (isRegistering ? "Register" : "Sign In")}
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center text-xs text-muted-foreground">
-            Protected by TaskFlow Enterprise Auth
+          <CardFooter className="flex flex-col gap-4">
+            <div className="text-center w-full">
+              <button 
+                type="button"
+                onClick={() => setIsRegistering(!isRegistering)}
+                className="text-sm text-primary hover:underline"
+              >
+                {isRegistering ? "Already have an account? Sign in" : "Don't have an account? Register"}
+              </button>
+            </div>
+            {!isRegistering && (
+              <div className="text-center w-full">
+                <button 
+                  type="button"
+                  onClick={() => alert("Password reset link sent to your email!")}
+                  className="text-xs text-muted-foreground hover:text-primary"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
           </CardFooter>
         </Card>
       </div>
